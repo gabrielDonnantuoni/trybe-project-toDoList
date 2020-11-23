@@ -1,32 +1,4 @@
-function createListItemManually() {
-  const input = document.querySelector('#texto-tarefa');
-  if (input.value !== '') {
-    const lista = document.querySelector('#lista-tarefas');
-    const novaTarefa = document.createElement('li');
-
-    novaTarefa.innerText = input.value;
-    novaTarefa.addEventListener('click', () => {
-      const selecteds = document.querySelectorAll('.selected');
-      selecteds.forEach((item) => {
-        item.classList.remove('selected');
-      });
-      novaTarefa.classList.add('selected');
-    });
-
-    novaTarefa.addEventListener('dblclick', () => {
-      novaTarefa.classList.toggle('completed');
-    });
-
-    lista.appendChild(novaTarefa);
-
-    input.value = '';
-  }
-}
-
-function createListItemAutomatically() {
-  const lista = document.querySelector('#lista-tarefas');
-  const novaTarefa = document.createElement('li');
-
+function addListItemsListeners(novaTarefa) {
   novaTarefa.addEventListener('click', () => {
     const selecteds = document.querySelectorAll('.selected');
     selecteds.forEach((item) => {
@@ -38,7 +10,25 @@ function createListItemAutomatically() {
   novaTarefa.addEventListener('dblclick', () => {
     novaTarefa.classList.toggle('completed');
   });
+}
 
+function createListItemManually() {
+  const input = document.querySelector('#texto-tarefa');
+  if (input.value !== '') {
+    const lista = document.querySelector('#lista-tarefas');
+    const novaTarefa = document.createElement('li');
+    addListItemsListeners(novaTarefa);
+    novaTarefa.innerText = input.value;
+    lista.appendChild(novaTarefa);
+
+    input.value = '';
+  }
+}
+
+function createListItemAutomatically() {
+  const lista = document.querySelector('#lista-tarefas');
+  const novaTarefa = document.createElement('li');
+  addListItemsListeners(novaTarefa);
   lista.appendChild(novaTarefa);
 }
 
